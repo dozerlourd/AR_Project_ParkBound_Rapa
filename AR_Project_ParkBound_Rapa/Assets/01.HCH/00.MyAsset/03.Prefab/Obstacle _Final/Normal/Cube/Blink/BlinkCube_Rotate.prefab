@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5753081221403758881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5753081221403758880}
+  m_Layer: 0
+  m_Name: BlinkCube_Rotate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5753081221403758880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753081221403758881}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5753081221951119292}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5753081221951119293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5753081221951119292}
+  - component: {fileID: 5753081221951119295}
+  m_Layer: 0
+  m_Name: Rotate Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5753081221951119292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753081221951119293}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3252623899294284240}
+  m_Father: {fileID: 5753081221403758880}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5753081221951119295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753081221951119293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41833a0415809e84bb198961c3f2ce38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 0.3
+  limitAngle: 90
+  delayTime: 4
+  startDelayTime: 0
+  rotDir: {x: 1, y: 1, z: 0}
+--- !u!1001 &5753081220625599210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5753081221951119292}
+    m_Modifications:
+    - target: {fileID: 7130509754060616502, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: visibleTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616502, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: nonBlinkTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616502, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: invisibleTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616502, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: previewBlinkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130509754060616509, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+      propertyPath: m_Name
+      value: BlinkCube
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+--- !u!4 &3252623899294284240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7130509754060616506, guid: a8cb43d8ef68c614aba432a900bf69a0, type: 3}
+  m_PrefabInstance: {fileID: 5753081220625599210}
+  m_PrefabAsset: {fileID: 0}
