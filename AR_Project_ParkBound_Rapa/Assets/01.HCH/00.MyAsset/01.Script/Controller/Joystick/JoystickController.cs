@@ -45,7 +45,7 @@ namespace JHS
             if (m_isControlJoystick) return;
 
             //if (Input.GetAxis("Horizontal") <= 0.4f) InputDirection = new Vector2(0, Input.GetAxis("Vertical"));
-            InputDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            InputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
 
         #endregion

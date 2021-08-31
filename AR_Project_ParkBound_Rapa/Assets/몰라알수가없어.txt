@@ -7,34 +7,35 @@ public class PlayerMove : MonoBehaviour
     public float playerSpeed = 5.0f;
 
 
-    //Á¡ÇÁ °­µµ Àû¿ë ½Ã°£ 
+    //ì í”„ ê°•ë„ ì ìš© ì‹œê°„ 
     public float jumpPower = 1f;
 
-    //Á¡ÇÁ °­µµ Á¾·ù
+    //ì í”„ ê°•ë„ ì¢…ë¥˜
 
     public float minJump = 1.0f;
     public float midJump = 2.0f;
     public float maxJump = 3.0f;
 
-    //Á¡ÇÁ ½Ã°£ ÃøÁ¤ Áö¼ö
+    bool isJumpClick;
+    //ì í”„ ì‹œê°„ ì¸¡ì • ì§€ìˆ˜
     float jumpClickTime;
+    float finalJump;
     bool isJump;
-
     Vector3 dir;
     [SerializeField] float gravity = -9.8f;
     float yVelocity = 0;
     int jumpCount = 1;
-    CharacterController cc;
+    //CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+        //cc = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Á¡ÇÁÅ°¸¦ ´­·¶À» ¶§ Á¡ÇÁ·ÂÀ» ³Ö¾îÁØ´Ù.
+        //ì í”„í‚¤ë¥¼ ëˆŒë €ì„ ë•Œ ì í”„ë ¥ì„ ë„£ì–´ì¤€ë‹¤.
 
         if (jumpCount > 0)
         {
@@ -49,11 +50,13 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
-                //Á¡ÇÁ½Ã°£À» 
+                //ì í”„ì‹œê°„ì„ 
                 //jumpClickTime += Time.deltaTime;
                 if (jumpClickTime > 0 && jumpClickTime <= 0.04f)
                 {
                     yVelocity = minJump;
+
+
                 }
                 else if (jumpClickTime > 0.04f && jumpClickTime <= 0.2f)
                 {
@@ -66,43 +69,51 @@ public class PlayerMove : MonoBehaviour
                 }
 
             }
+
             if (Input.GetButtonUp("Jump"))
             {
 
                 isJump = false;
                 print(isJump);
                 yVelocity = 0;
-            }
 
+            }
         }
+
+        
 
         if (isJump)
         {
+
             jumpClickTime += Time.deltaTime;
         }
         else
         {
-            print(jumpClickTime);
+            //print(jumpClickTime);
             jumpClickTime = 0;
+
+            //ìºë¦­í„°ê°€ ë°”ë‹¥ì— ìˆì„ ë•ŒëŠ” ì¤‘ë ¥ ì ìš©ì´ ì•ˆë˜ë„ë¡
+            //if (cc.collisionFlags == CollisionFlags.Below)
+            //if (cc.isGrounded)
+
+            Debug.DrawRay(transform.position + Vector3.down * 0.26f, Vector3.down * 0.1f, Color.red);
+            if (Physics.Raycast(transform.position + Vector3.down * 0.26f, Vector3.down, 0.1f, 1 << 6))
+            {
+                yVelocity = 0;
+
+                jumpCount = 1;
+
+            }
         }
 
-        //¸ñÇ¥: Ä«¸Ş¶ó¸¦ º¸´Â Á¤¸é ¹æÇâÀ» ±âÁØÀ¸·Î Ä³¸¯ÅÍÀÇ ÀÌµ¿Å°(W,A,S,D)¸¦ ¼³Á¤ÇÑ´Ù. 
+        //ëª©í‘œ: ì¹´ë©”ë¼ë¥¼ ë³´ëŠ” ì •ë©´ ë°©í–¥ì„ ê¸°ì¤€ìœ¼ë¡œ ìºë¦­í„°ì˜ ì´ë™í‚¤(W,A,S,D)ë¥¼ ì„¤ì •í•œë‹¤. 
         yVelocity += gravity * Time.deltaTime;
 
-        //Ä³¸¯ÅÍ°¡ ¹Ù´Ú¿¡ ÀÖÀ» ¶§´Â Áß·Â Àû¿ëÀÌ ¾ÈµÇµµ·Ï
-        //if (cc.collisionFlags == CollisionFlags.Below)
-        if (cc.isGrounded)
-        {
-            yVelocity = 0;
 
-            jumpCount = 1;
-
-        }
-
-        //Á¤¸é º¤ÅÍ¸¦ ¼³Á¤ÇÑ´Ù.
+        //ì •ë©´ ë²¡í„°ë¥¼ ì„¤ì •í•œë‹¤.
         Vector3 heading = Camera.main.transform.localRotation * Vector3.forward;
 
-        //Ä«¸Ş¶ó ½Ã¼±¿¡µµ ¹Ù²îÁö ¾Êµµ·Ï y°ªÀº 0À¸·Î ¸¸µç´Ù.
+        //ì¹´ë©”ë¼ ì‹œì„ ì—ë„ ë°”ë€Œì§€ ì•Šë„ë¡ yê°’ì€ 0ìœ¼ë¡œ ë§Œë“ ë‹¤.
         heading.y = 0;
         heading = heading.normalized;
 
@@ -115,7 +126,28 @@ public class PlayerMove : MonoBehaviour
         }
 
         dir.y = yVelocity;
-        cc.Move(dir);
+        transform.Translate(dir);
+
     }
+
+    //public void jumpButtonDown()
+    //{
+    //    if (Input.GetButtonDown("Jump")&& jumpCount > 0)
+    //    { 
+    //        isJump = true;
+    //        jumpClickTime += Time.deltaTime;
+    //        print(jumpClickTime);
+    //        jumpCount--;
+    //        if (Input.GetButtonUp("Jump"))
+    //        {
+    //            isJump = false;
+    //            jumpClickTime = 0;
+    //        }
+
+    //    }
+
+    //}
+
+
 }
 
