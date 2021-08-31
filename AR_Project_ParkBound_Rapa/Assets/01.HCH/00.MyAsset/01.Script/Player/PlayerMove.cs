@@ -118,8 +118,8 @@ public class PlayerMove : MonoBehaviour
         heading.y = 0;
         heading = heading.normalized;
         
-        dir = heading  * Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
-        dir += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * Input.GetAxis("Horizontal") * playerSpeed;
+        dir = heading  * ControllerSystem.Instance.vertical_InputDirection.y * playerSpeed * Time.deltaTime;
+        dir += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * ControllerSystem.Instance.horizontal_InputDirection.x * playerSpeed;
         
         if(yVelocity > maxJump)
         {
