@@ -60,6 +60,7 @@ public class PlayerSystem : SceneObject<PlayerSystem>
         Player.SetActive(false);
         Player.transform.position = InitPosition;
 
+
         yield return new WaitForSeconds(InitDelayTime);
         Player.SetActive(true);
     }

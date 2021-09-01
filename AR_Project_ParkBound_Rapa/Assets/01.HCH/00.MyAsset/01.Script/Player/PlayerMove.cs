@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     yVelocity = midJump;
                 }
-                else if (jumpClickTime > 0.2f)
+                else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
                 {
                     yVelocity = maxJump;
 
@@ -71,7 +71,10 @@ public class PlayerMove : MonoBehaviour
 
                 isJump = false;
                 print(isJump);
-                yVelocity = 0;
+                if(yVelocity > 0)
+                {
+                    yVelocity = 0;
+                }
             }
 
         }
