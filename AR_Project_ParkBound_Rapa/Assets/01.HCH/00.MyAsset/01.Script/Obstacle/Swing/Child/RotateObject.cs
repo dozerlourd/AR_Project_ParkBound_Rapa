@@ -17,8 +17,8 @@ public class RotateObject : RotateObstacle
     {
         while (IncreaseValue < _angle && IncreaseValue >= 0)
         {
-            IncreaseValue += _speed;
-            transform.eulerAngles += rotDir * rotSpeed;
+            IncreaseValue += _speed * Time.deltaTime;
+            transform.eulerAngles += rotDir * rotSpeed * Time.deltaTime;
             yield return null;
         }
     }
