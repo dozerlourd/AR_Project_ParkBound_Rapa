@@ -39,15 +39,16 @@ public class PlayerMove : MonoBehaviour
         if (jumpCount > 0)
         {
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpStart)
             {
                 jumpClickTime = 0;
                 isJump = true;
                 print(isJump);
                 jumpCount--;
+                UISystem.Instance.jumpType = UISystem.JumpType.JumpStay;
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpStay)
             {
                 //점프시간을 
                 //jumpClickTime += Time.deltaTime;
@@ -59,21 +60,21 @@ public class PlayerMove : MonoBehaviour
                 {
                     yVelocity = midJump;
                 }
-                else if (jumpClickTime > 0.2f)
+                else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
                 {
                     yVelocity = maxJump;
-
                 }
-
             }
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetButtonUp("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpExit)
             {
 
                 isJump = false;
                 print(isJump);
-                yVelocity = 0;
+                if(yVelocity > 0)
+                {
+                    yVelocity = 0;
+                }
             }
-
         }
 
         if (isJump)
@@ -84,6 +85,7 @@ public class PlayerMove : MonoBehaviour
         {
             print(jumpClickTime);
             jumpClickTime = 0;
+            UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
         }
 
         //목표: 카메라를 보는 정면 방향을 기준으로 캐릭터의 이동키(W,A,S,D)를 설정한다. 
