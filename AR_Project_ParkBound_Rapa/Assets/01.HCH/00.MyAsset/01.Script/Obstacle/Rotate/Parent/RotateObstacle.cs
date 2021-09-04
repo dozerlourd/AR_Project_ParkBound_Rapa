@@ -15,7 +15,8 @@ public abstract class RotateObstacle : MonoBehaviour
         CoroutineManager.Instance.StartCoroutine(RotateCycle());
     }
 
-    protected abstract IEnumerator Rotate(float _speed, float _angle);
+    protected virtual IEnumerator Rotate(float _speed, float _angle) { yield return null; }
+    protected virtual IEnumerator Rotate(float _speed) { yield return null; }
 
     protected abstract IEnumerator RotateCycle();
 }

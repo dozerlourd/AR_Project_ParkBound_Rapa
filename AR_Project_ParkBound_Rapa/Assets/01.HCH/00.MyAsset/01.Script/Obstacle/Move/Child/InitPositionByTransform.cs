@@ -2,16 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObstacle : MonoBehaviour
+public class InitPositionByTransform : MoveByTransform
 {
-    private WaitForSeconds waitSeconds, startWaitSeconds;
+    [SerializeField] Transform initPos;
 
-    [SerializeField] float moveSpeed, delayTime, startDelayTime;
-    float rate = 0f;
-
-    [SerializeField] Vector3[] targetTrArray;
-
-    void Start()
+    new void Start()
     {
         startWaitSeconds = new WaitForSeconds(startDelayTime);
         waitSeconds = new WaitForSeconds(delayTime);
@@ -20,20 +15,18 @@ public class MoveObstacle : MonoBehaviour
         CoroutineManager.Instance.StartCoroutine(MoveCycle(moveSpeed, targetTrArray));
     }
 
-    IEnumerator Move(float _speed, Vector3 targetTr)
+    protected override IEnumerator Move(float _speed, Transform targetTr)
     {
-        
-        Vector3 startPos = transform.position;
+        Vector3 dir = targetTr.position - transform.position;
 
-        while(rate <= 1)
+        while (Vector3.Distance(targetTr.position, transform.position) >= 0.1f)
         {
-            rate += _speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetTr, rate);
+            transform.position += dir.normalized * _speed * Time.deltaTime;
             yield return null;
         }
     }
 
-    IEnumerator MoveCycle(float _speed, Vector3[] targetTr)
+    protected override IEnumerator MoveCycle(float _speed, Transform[] targetTr)
     {
         yield return startWaitSeconds;
 
@@ -43,9 +36,15 @@ public class MoveObstacle : MonoBehaviour
             {
                 yield return StartCoroutine(Move(_speed, targetTr[i]));
 
-                rate = 0;
+                InitPos();
                 yield return waitSeconds;
             }
         }
+    }
+
+    void InitPos()
+    {
+        transform.position = initPos.position;
+        print("√ ±‚»≠");
     }
 }
