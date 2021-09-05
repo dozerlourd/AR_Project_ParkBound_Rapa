@@ -20,16 +20,23 @@ public class PlayerMove : MonoBehaviour
     float jumpClickTime;
     bool isJump;
 
+    float ry;
+
+    public float rotSpeed = 200;
+
     public Vector3 dir;
     [SerializeField] float gravity = -9.8f;
     public float yVelocity = 0;
     int jumpCount = 1;
+
+    Animator anim;
     CharacterController cc;
 
     [SerializeField] Transform platformTr;
 
     void Start()
     {
+        anim = transform.GetChild(0).GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
         UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
     }
@@ -45,7 +52,7 @@ public class PlayerMove : MonoBehaviour
             {
                 jumpClickTime = 0;
                 isJump = true;
-                //print(isJump);
+                anim.SetTrigger("Jump");
                 jumpCount--;
                 UISystem.Instance.jumpType = UISystem.JumpType.JumpStay;
             }
@@ -61,15 +68,16 @@ public class PlayerMove : MonoBehaviour
                 else if (jumpClickTime > 0.04f && jumpClickTime <= 0.2f)
                 {
                     yVelocity = midJump;
+                    
                 }
                 else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
                 {
                     yVelocity = maxJump;
+                    anim.SetTrigger("JumpEnd");
                 }
             }
             if (Input.GetButtonUp("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpExit)
             {
-
                 isJump = false;
                 print(isJump);
                 if(yVelocity > 0)
@@ -112,6 +120,17 @@ public class PlayerMove : MonoBehaviour
 
         dir = heading * ControllerSystem.Instance.vertical_InputDirection.y * playerSpeed * Time.deltaTime;
         dir += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * ControllerSystem.Instance.horizontal_InputDirection.x * playerSpeed;
+
+        float jy = ControllerSystem.Instance.vertical_InputDirection.y * 2;
+        float jx = ControllerSystem.Instance.horizontal_InputDirection.x * 2;
+
+        //조이스틱 방향에 따라 캐릭터의 Rotation 값을 다르게 한다.
+        //요소: Rotation 값, 회전 속도, 조이스틱 방향 값
+        //1. 만약 조이스틱 방향이 왼쪽을 향한다면,
+
+
+        anim.SetFloat("Horizontal", jx);
+        anim.SetFloat("Vertical", jy);
 
         if (yVelocity > maxJump)
         {
