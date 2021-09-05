@@ -11,8 +11,8 @@ public class MoveObstacleByVector : MoveByVector
 
         while(rate <= 1)
         {
-            rate += _speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetTr, rate);
+            rate += _speed * Time.deltaTime * transform.lossyScale.x;
+            transform.position = Vector3.Lerp(startPos, targetTr * transform.lossyScale.x, rate);
             yield return null;
         }
     }

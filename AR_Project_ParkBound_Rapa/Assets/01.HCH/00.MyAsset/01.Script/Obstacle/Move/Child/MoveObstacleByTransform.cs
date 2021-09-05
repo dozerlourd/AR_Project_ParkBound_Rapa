@@ -11,7 +11,7 @@ public class MoveObstacleByTransform : MoveByTransform
 
         while (rate <= 1)
         {
-            rate += _speed * Time.deltaTime;
+            rate += _speed * Time.deltaTime * transform.lossyScale.x;
             transform.position = Vector3.Lerp(startPos, targetTr.position, rate);
             yield return null;
         }

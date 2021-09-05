@@ -21,7 +21,7 @@ public class InitPositionByTransform : MoveByTransform
 
         while (Vector3.Distance(targetTr.position, transform.position) >= 0.1f)
         {
-            transform.position += dir.normalized * _speed * Time.deltaTime;
+            transform.position += dir.normalized * _speed * Time.deltaTime * transform.lossyScale.x;
             yield return null;
         }
     }
@@ -45,6 +45,6 @@ public class InitPositionByTransform : MoveByTransform
     void InitPos()
     {
         transform.position = initPos.position;
-        print("초기화");
+        //print("초기화");
     }
 }

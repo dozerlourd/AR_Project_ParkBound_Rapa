@@ -22,6 +22,7 @@ public class RotateObject : RotateObstacle
             transform.eulerAngles += rotDir * rotSpeed * Time.deltaTime;
             yield return null;
         }
+        ClampIncreaseZ();
     }
 
     protected override IEnumerator RotateCycle()
@@ -41,8 +42,6 @@ public class RotateObject : RotateObstacle
                 {
                     yield return waitSeconds2;
                 }
-                
-                ClampIncreaseZ();
                 ChangeSpeed();
             }
         }

@@ -20,9 +20,9 @@ public class PlayerMove : MonoBehaviour
     float jumpClickTime;
     bool isJump;
 
-    Vector3 dir;
+    public Vector3 dir;
     [SerializeField] float gravity = -9.8f;
-    float yVelocity = 0;
+    public float yVelocity = 0;
     int jumpCount = 1;
     CharacterController cc;
 
@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
     }
 
     void Update()
@@ -102,8 +103,6 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-
-
         //정면 벡터를 설정한다.
         Vector3 heading = Camera.main.transform.localRotation * Vector3.forward;
 
@@ -120,7 +119,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         dir.y = yVelocity;
-        cc.Move(dir);
+        cc.Move(dir * transform.lossyScale.x);
     }
 }
 

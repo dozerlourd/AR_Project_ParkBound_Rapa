@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855794721442349595}
   m_Layer: 0
-  m_Name: Cri Static Cylinder
+  m_Name: Spike_Static Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
