@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class RotateObject : RotateObstacle
 {
-    private WaitForSeconds waitSeconds, startWaitSeconds;
+    private WaitForSeconds waitSeconds1, waitSeconds2, startWaitSeconds;
 
     private new void Start()
     {
         startWaitSeconds = new WaitForSeconds(startDelayTime);
-        waitSeconds = new WaitForSeconds(delayTime);
+        waitSeconds1 = new WaitForSeconds(delayTime1);
+        waitSeconds2 = new WaitForSeconds(delayTime2);
         base.Start();
     }
 
@@ -29,10 +30,21 @@ public class RotateObject : RotateObstacle
 
         while (true)
         {
-            yield return StartCoroutine(Rotate(rotSpeed, limitAngle));
-            yield return waitSeconds;
-            ClampIncreaseZ();
-            ChangeSpeed();
+            for (int i = 0; i < 2; i++)
+            {
+                yield return StartCoroutine(Rotate(rotSpeed, limitAngle));
+                if(i == 0)
+                {
+                    yield return waitSeconds1;
+                }
+                else
+                {
+                    yield return waitSeconds2;
+                }
+                
+                ClampIncreaseZ();
+                ChangeSpeed();
+            }
         }
     }
 

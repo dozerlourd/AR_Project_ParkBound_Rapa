@@ -77,7 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 240
   limitAngle: 270
-  delayTime: 3
+  delayTime1: 2.5
+  delayTime2: 1
   startDelayTime: 0
   rotDir: {x: 0, y: 0, z: 1}
 --- !u!1001 &2460237496714522522

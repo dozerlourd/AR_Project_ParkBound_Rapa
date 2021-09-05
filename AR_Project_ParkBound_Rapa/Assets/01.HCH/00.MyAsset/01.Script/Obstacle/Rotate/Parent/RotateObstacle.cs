@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class RotateObstacle : MonoBehaviour
 {
-    [SerializeField] protected float rotSpeed, limitAngle, delayTime, startDelayTime;
+    [SerializeField] protected float rotSpeed, limitAngle, delayTime1, delayTime2, startDelayTime;
     protected float IncreaseValue;
 
     [SerializeField] protected Vector3 rotDir;

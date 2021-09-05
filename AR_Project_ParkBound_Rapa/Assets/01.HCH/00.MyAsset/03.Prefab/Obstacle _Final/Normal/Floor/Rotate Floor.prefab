@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41833a0415809e84bb198961c3f2ce38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 120
+  rotSpeed: 175
   limitAngle: 180
-  delayTime: 2
+  delayTime1: 1
+  delayTime2: 1
   startDelayTime: 0
   rotDir: {x: 0, y: 0, z: -1}
 --- !u!1 &6912770280692870783

@@ -25,13 +25,14 @@ public class PlayerMove : MonoBehaviour
     float yVelocity = 0;
     int jumpCount = 1;
     CharacterController cc;
-    // Start is called before the first frame update
+
+    [SerializeField] Transform platformTr;
+
     void Start()
     {
         cc = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //점프키를 눌렀을 때 점프력을 넣어준다.
@@ -43,7 +44,7 @@ public class PlayerMove : MonoBehaviour
             {
                 jumpClickTime = 0;
                 isJump = true;
-                print(isJump);
+                //print(isJump);
                 jumpCount--;
                 UISystem.Instance.jumpType = UISystem.JumpType.JumpStay;
             }
@@ -100,6 +101,8 @@ public class PlayerMove : MonoBehaviour
             jumpCount = 1;
 
         }
+
+
 
         //정면 벡터를 설정한다.
         Vector3 heading = Camera.main.transform.localRotation * Vector3.forward;

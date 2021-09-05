@@ -35,7 +35,7 @@ public class PlayerSystem : SceneObject<PlayerSystem>
             _originPos = GameObject.FindGameObjectWithTag("T_OriginPos").transform.position != null ?
             GameObject.FindGameObjectWithTag("T_OriginPos").transform.position :
             Vector3.zero;
-            print(GameObject.FindGameObjectWithTag("T_OriginPos"));
+            //print(GameObject.FindGameObjectWithTag("T_OriginPos"));
         }
     }
 
