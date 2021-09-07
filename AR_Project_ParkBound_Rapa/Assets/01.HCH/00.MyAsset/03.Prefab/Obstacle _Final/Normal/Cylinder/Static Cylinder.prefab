@@ -90,6 +90,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8078917242424793117, guid: 028e752cf4f65e743bffb39d03a8bd88, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078917242424793117, guid: 028e752cf4f65e743bffb39d03a8bd88, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8078917242424793119, guid: 028e752cf4f65e743bffb39d03a8bd88, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 028e752cf4f65e743bffb39d03a8bd88, type: 3}
