@@ -63,16 +63,16 @@ public class PlayerMove : MonoBehaviour
                 //jumpClickTime += Time.deltaTime;
                 if (jumpClickTime > 0 && jumpClickTime <= 0.08f)
                 {
-                    yVelocity = minJump * Time.deltaTime;
+                    yVelocity = minJump * Time.deltaTime * transform.lossyScale.x;
                 }
-                else if (jumpClickTime > 0.08f && jumpClickTime <= 0.275f)
+                else if (jumpClickTime > 0.08f && jumpClickTime <= 0.35f)
                 {
-                    yVelocity = midJump * Time.deltaTime;
+                    yVelocity = midJump * Time.deltaTime * transform.lossyScale.x;
                     
                 }
-                else if (jumpClickTime > 0.275f && jumpClickTime <= 0.45f)
+                else if (jumpClickTime > 0.35f && jumpClickTime <= 0.6f)
                 {
-                    yVelocity = maxJump * Time.deltaTime;
+                    yVelocity = maxJump * Time.deltaTime * transform.lossyScale.x;
                     anim.SetTrigger("JumpEnd");
                 }
             }
@@ -99,7 +99,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //목표: 카메라를 보는 정면 방향을 기준으로 캐릭터의 이동키(W,A,S,D)를 설정한다. 
-        yVelocity += gravity * Time.deltaTime;
+        yVelocity += gravity * Time.deltaTime * transform.lossyScale.x;
 
         //캐릭터가 바닥에 있을 때는 중력 적용이 안되도록
         //if (cc.collisionFlags == CollisionFlags.Below)
