@@ -61,18 +61,18 @@ public class PlayerMove : MonoBehaviour
             {
                 //점프시간을 
                 //jumpClickTime += Time.deltaTime;
-                if (jumpClickTime > 0 && jumpClickTime <= 0.04f)
+                if (jumpClickTime > 0 && jumpClickTime <= 0.08f)
                 {
-                    yVelocity = minJump;
+                    yVelocity = minJump * Time.deltaTime;
                 }
-                else if (jumpClickTime > 0.04f && jumpClickTime <= 0.2f)
+                else if (jumpClickTime > 0.08f && jumpClickTime <= 0.275f)
                 {
-                    yVelocity = midJump;
+                    yVelocity = midJump * Time.deltaTime;
                     
                 }
-                else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
+                else if (jumpClickTime > 0.275f && jumpClickTime <= 0.45f)
                 {
-                    yVelocity = maxJump;
+                    yVelocity = maxJump * Time.deltaTime;
                     anim.SetTrigger("JumpEnd");
                 }
             }

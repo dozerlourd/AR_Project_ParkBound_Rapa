@@ -1169,7 +1169,8 @@ MonoBehaviour:
   fadeImage: {fileID: 313869282}
   fadeSpeed: 1
   lobbyUI: {fileID: 2044625471}
-  nextSceneName: PlayScene
+  nextSceneName: Test
+  nextSceneIndex: 2
 --- !u!1 &1698617338
 GameObject:
   m_ObjectHideFlags: 0

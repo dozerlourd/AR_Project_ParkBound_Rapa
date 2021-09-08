@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/01.HCH/00.MyAsset/06.Scene/LobbyScene.unity
     guid: 8064194f8bc36cb4e9945451eacee45d
   - enabled: 1
-    path: Assets/01.HCH/00.MyAsset/06.Scene/PlayScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/01.HCH/00.MyAsset/06.Scene/Test.unity
+    guid: c0ae1d35675c1a1428eaab9680d87260
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 3dccc284dc107614b9153cdf435408da, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d656d180aa925ab4aafc54ab79e718a5, type: 2}

@@ -12,6 +12,8 @@ public class LobbySceneSystem : SceneObject<LobbySceneSystem>
 
     [SerializeField] string nextSceneName;
 
+    [SerializeField] int nextSceneIndex;
+
     void Start()
     {
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
@@ -31,6 +33,6 @@ IEnumerator LobbyFlow()
 
 public void OnClickPlayButton()
 {
-    GameManager.ChangeScene(nextSceneName);
+    GameManager.ChangeScene(nextSceneIndex);
 }
 }
