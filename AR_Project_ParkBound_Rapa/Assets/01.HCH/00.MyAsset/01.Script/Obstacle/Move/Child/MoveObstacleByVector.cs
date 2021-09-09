@@ -7,12 +7,12 @@ public class MoveObstacleByVector : MoveByVector
     protected override IEnumerator Move(float _speed, Vector3 targetTr)
     {
         
-        Vector3 startPos = transform.position;
+        Vector3 startPos = transform.localPosition;
 
         while(rate <= 1)
         {
             rate += _speed * Time.deltaTime * transform.lossyScale.x;
-            transform.position = Vector3.Lerp(startPos, targetTr * transform.lossyScale.x, rate);
+            transform.localPosition = Vector3.Lerp(startPos, targetTr, rate);
             yield return null;
         }
     }

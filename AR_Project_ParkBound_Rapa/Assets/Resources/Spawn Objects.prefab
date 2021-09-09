@@ -994,7 +994,7 @@ Transform:
   m_GameObject: {fileID: 7981070397350169524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 7981070398782830436}
   - {fileID: 7981070396924895829}
@@ -1811,14 +1811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e30fa461a42642468fc38fa8ce1299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 3.75
   jumpPower: 0.05
-  minJump: 8.8
-  midJump: 6.6
-  maxJump: 4.4
+  minJump: 7.7
+  midJump: 5.5
+  maxJump: 3.3
   rotSpeed: 200
   dir: {x: 0, y: 0, z: 0}
-  gravity: -0.392
+  gravity: -0.294
   yVelocity: 0
   platformTr: {fileID: 7981070396763796185}
 --- !u!143 &7981070398177976250

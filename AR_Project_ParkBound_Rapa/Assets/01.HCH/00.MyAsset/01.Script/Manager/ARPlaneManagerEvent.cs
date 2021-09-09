@@ -8,6 +8,7 @@ public class ARPlaneManagerEvent : MonoBehaviour
 {
     public GameObject spawnObject;
     public ARPlaneManager arPlaneManager;
+    static int spawnCount = 0;
 
     private Dictionary<TrackableId, GameObject> spawnObjects;
 
@@ -24,7 +25,11 @@ public class ARPlaneManagerEvent : MonoBehaviour
         {
             foreach (ARPlane plane in addedPlanes)
             {
-                GameObject instance = Instantiate(spawnObject, plane.center, plane.transform.rotation);
+                if (spawnCount == 0)
+                {
+                    GameObject instance = Instantiate(spawnObject, plane.center + Vector3.up * 0.5f, plane.transform.rotation);
+                    spawnCount++;
+                }
                 //spawnObjects.Add(plane.trackableId, instance);
             }
         }
