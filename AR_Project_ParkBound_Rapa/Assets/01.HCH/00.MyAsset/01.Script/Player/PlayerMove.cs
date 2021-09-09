@@ -61,26 +61,32 @@ public class PlayerMove : MonoBehaviour
             {
                 //점프시간을 
                 //jumpClickTime += Time.deltaTime;
-                if (jumpClickTime > 0 && jumpClickTime <= 0.08f)
+                if (jumpClickTime > 0 && jumpClickTime <= 0.04f)
                 {
-                    yVelocity = minJump * Time.deltaTime * transform.lossyScale.x;
+                    yVelocity = minJump;
                 }
-                else if (jumpClickTime > 0.08f && jumpClickTime <= 0.35f)
+                else if (jumpClickTime > 0.04f && jumpClickTime <= 0.2f)
                 {
-                    yVelocity = midJump * Time.deltaTime * transform.lossyScale.x;
-                    
+                    yVelocity = midJump;
+
                 }
-                else if (jumpClickTime > 0.35f && jumpClickTime <= 0.6f)
+                else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
                 {
-                    yVelocity = maxJump * Time.deltaTime * transform.lossyScale.x;
-                    anim.SetTrigger("JumpEnd");
+                    yVelocity = maxJump;
+
+                }
+
+                else if (yVelocity > maxJump)
+                {
+                    yVelocity = maxJump;
                 }
             }
             if (Input.GetButtonUp("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpExit)
             {
                 isJump = false;
                 print(isJump);
-                if(yVelocity > 0)
+
+                if (yVelocity > 0)
                 {
                     yVelocity = 0;
                 }
@@ -93,13 +99,14 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            anim.SetTrigger("JumpEnd");
             print(jumpClickTime);
             jumpClickTime = 0;
             UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
         }
 
         //목표: 카메라를 보는 정면 방향을 기준으로 캐릭터의 이동키(W,A,S,D)를 설정한다. 
-        yVelocity += gravity * Time.deltaTime * transform.lossyScale.x;
+        yVelocity += gravity * Time.deltaTime;
 
         //캐릭터가 바닥에 있을 때는 중력 적용이 안되도록
         //if (cc.collisionFlags == CollisionFlags.Below)
@@ -112,17 +119,15 @@ public class PlayerMove : MonoBehaviour
         }
 
         //정면 벡터를 설정한다.
-        Vector3 heading = Camera.main.transform.localRotation * Vector3.forward;
-
-        //카메라 시선에도 바뀌지 않도록 y값은 0으로 만든다.
-        heading.y = 0;
-        heading = heading.normalized;
-
-        dir = heading * ControllerSystem.Instance.vertical_InputDirection.y * playerSpeed * Time.deltaTime;
-        dir += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * ControllerSystem.Instance.horizontal_InputDirection.x * playerSpeed;
 
         float jy = ControllerSystem.Instance.vertical_InputDirection.y * 2;
         float jx = ControllerSystem.Instance.horizontal_InputDirection.x * 2;
+
+        Vector3 dir = new Vector3(jx, 0, jy);
+
+        dir.Normalize();
+
+        dir = Camera.main.transform.TransformDirection(dir);
 
         //조이스틱 방향에 따라 캐릭터의 Rotation 값을 다르게 한다.
         //요소: Rotation 값, 회전 속도, 조이스틱 방향 값
@@ -132,13 +137,13 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("Horizontal", jx);
         anim.SetFloat("Vertical", jy);
 
-        if (yVelocity > maxJump)
-        {
-            yVelocity = maxJump;
-        }
 
         dir.y = yVelocity;
-        cc.Move(dir * transform.lossyScale.x);
+        cc.Move(dir * transform.lossyScale.x * Time.deltaTime * playerSpeed);
+        Vector3 playerAngle = dir * 1 / Time.deltaTime;
+        playerAngle.y = 0;
+        transform.right = playerAngle;
     }
 }
+
 
