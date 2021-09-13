@@ -186,6 +186,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9099412160241417549, guid: 60414ffb2d20d784bab0dd370b1a0294, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099412160241417549, guid: 60414ffb2d20d784bab0dd370b1a0294, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9099412160241417551, guid: 60414ffb2d20d784bab0dd370b1a0294, type: 3}
       propertyPath: m_RootOrder
       value: 0
