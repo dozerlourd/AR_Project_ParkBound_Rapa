@@ -206,8 +206,4 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
 
         }
     }
-
-
-
 }
-
