@@ -10,11 +10,14 @@ public class ARPlaneManagerEvent : MonoBehaviour
     public ARPlaneManager arPlaneManager;
     static int spawnCount = 0;
 
+    [SerializeField] GameObject planeCheckGuideImage;
+
     private Dictionary<TrackableId, GameObject> spawnObjects;
 
     void Start()
     {
         arPlaneManager.planesChanged += ArPlaneManager_planesChanged;
+        planeCheckGuideImage.SetActive(true);
     }
 
     private void ArPlaneManager_planesChanged(ARPlanesChangedEventArgs obj)
@@ -29,8 +32,8 @@ public class ARPlaneManagerEvent : MonoBehaviour
                 {
                     GameObject instance = Instantiate(spawnObject, plane.center + Vector3.up * 0.5f, plane.transform.rotation);
                     spawnCount++;
+                    planeCheckGuideImage.SetActive(false);
                 }
-                //spawnObjects.Add(plane.trackableId, instance);
             }
         }
 
