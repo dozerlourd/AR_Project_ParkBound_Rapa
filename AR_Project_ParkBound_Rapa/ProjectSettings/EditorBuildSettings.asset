@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.HCH/00.MyAsset/06.Scene/GuidedDisplayScene.unity
     guid: 4a63c740f92471447b75e65b3ff4e1fb
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/01.HCH/00.MyAsset/06.Scene/LoginScene.unity
+    guid: 3f92d3dc44515684db1afb743413f461
+>>>>>>> Stashed changes
   - enabled: 1
     path: Assets/01.HCH/00.MyAsset/06.Scene/LobbyScene.unity
     guid: 8064194f8bc36cb4e9945451eacee45d

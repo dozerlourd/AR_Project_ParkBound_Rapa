@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove_Ver2 : MonoBehaviour
 {
+
     public float playerSpeed = 5.0f;
-    
+
 
     //점프 강도 적용 시간 
     public float jumpPower = 1f;
@@ -20,33 +21,29 @@ public class PlayerMove : MonoBehaviour
     float jumpClickTime;
     bool isJump;
 
-    //캐릭터 회전 변수
-    //float ry;
+    float ry;
 
     public float rotSpeed = 200;
 
-    Vector3 dir;
+    public Vector3 dir;
     [SerializeField] float gravity = -9.8f;
-    float yVelocity = 0;
+    public float yVelocity = 0;
     int jumpCount = 1;
-    CharacterController cc;
-    Animator anim;
-    int jumpHash = 0;
 
-    // Start is called before the first frame update
+    Animator anim;
+    CharacterController cc;
+
+    [SerializeField] Transform platformTr;
+
     void Start()
     {
+        anim = transform.GetChild(0).GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
-        anim = GetComponentInChildren<Animator>();
-        jumpHash = Animator.StringToHash("Base Layer.JumpStart");
-
         UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
     }
 
-    // Update is called once per frame
     void Update()
     {
-      
         //점프키를 눌렀을 때 점프력을 넣어준다.
 
         if (jumpCount > 0)
@@ -54,7 +51,6 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpStart)
             {
-                print("점프키 "+ UISystem.Instance.jumpType);
                 jumpClickTime = 0;
                 isJump = true;
                 anim.SetTrigger("Jump");
@@ -73,23 +69,21 @@ public class PlayerMove : MonoBehaviour
                 else if (jumpClickTime > 0.04f && jumpClickTime <= 0.2f)
                 {
                     yVelocity = midJump;
+                    
                 }
                 else if (jumpClickTime > 0.2f && jumpClickTime <= 0.3f)
                 {
                     yVelocity = maxJump;
                     
                 }
-                else if (jumpClickTime > 0.3f && jumpClickTime <= 1.0f)
-                {
-                   
-                    //anim.SetTrigger("JumpEnd");
-                }
 
+                else if (yVelocity > maxJump)
+                {
+                    yVelocity = maxJump;
+                }
             }
             if (Input.GetButtonUp("Jump") || UISystem.Instance.jumpType == UISystem.JumpType.JumpExit)
             {
-                anim.SetTrigger("JumpEnd");
-              
                 isJump = false;
                 print(isJump);
                 
@@ -100,20 +94,14 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-
-
         if (isJump)
         {
             jumpClickTime += Time.deltaTime;
         }
         else
         {
-<<<<<<< Updated upstream:AR_Project_ParkBound_Rapa/Assets/JW/Scripts/PlayerMove.cs
-            print(jumpClickTime);
-=======
             anim.SetTrigger("JumpEnd");
-            //print(jumpClickTime);
->>>>>>> Stashed changes:AR_Project_ParkBound_Rapa/Assets/01.HCH/00.MyAsset/01.Script/Player/PlayerMove.cs
+            print(jumpClickTime);
             jumpClickTime = 0;
             UISystem.Instance.jumpType = UISystem.JumpType.Grounded;
         }
@@ -132,73 +120,30 @@ public class PlayerMove : MonoBehaviour
         }
 
         //정면 벡터를 설정한다.
-        Vector3 heading = Camera.main.transform.localRotation * Vector3.forward;
-
-        //카메라 시선에도 바뀌지 않도록 y값은 0으로 만든다.
-        heading.y = 0;
-        heading = heading.normalized;
-
-    //if(ControllerSystem.Instance.horizontal_InputDirection.x !=0)
-    //    {
-    //        transform.Rotate(0, -rotSpeed * Time.deltaTime, 0);
-    //    }
-
-<<<<<<< Updated upstream:AR_Project_ParkBound_Rapa/Assets/JW/Scripts/PlayerMove.cs
-        dir = heading * ControllerSystem.Instance.vertical_InputDirection.y * playerSpeed * Time.deltaTime;
-        dir += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * ControllerSystem.Instance.horizontal_InputDirection.x * playerSpeed;
-
-        //ry += rotSpeed * ControllerSystem.Instance.horizontal_InputDirection.y * Time.deltaTime;
-        //transform.eulerAngles = new Vector3(0, ry, 0);
-  
+        
         float jy = ControllerSystem.Instance.vertical_InputDirection.y * 2;
         float jx = ControllerSystem.Instance.horizontal_InputDirection.x * 2;
+
+        Vector3 dir = new Vector3(jx, 0, jy);
+
+        dir.Normalize();
+
+        dir = Camera.main.transform.TransformDirection(dir);
 
         //조이스틱 방향에 따라 캐릭터의 Rotation 값을 다르게 한다.
         //요소: Rotation 값, 회전 속도, 조이스틱 방향 값
         //1. 만약 조이스틱 방향이 왼쪽을 향한다면,
-=======
-            
-        dir = Camera.main.transform.TransformDirection(dir);
-         
-            //조이스틱 방향에 따라 캐릭터의 Rotation 값을 다르게 한다.
-            //요소: Rotation 값, 회전 속도, 조이스틱 방향 값
-            //1. 만약 조이스틱 방향이 왼쪽을 향한다면,
->>>>>>> Stashed changes:AR_Project_ParkBound_Rapa/Assets/01.HCH/00.MyAsset/01.Script/Player/PlayerMove.cs
 
 
-            anim.SetFloat("Horizontal", jx);
+        anim.SetFloat("Horizontal", jx);
         anim.SetFloat("Vertical", jy);
 
-<<<<<<< Updated upstream:AR_Project_ParkBound_Rapa/Assets/JW/Scripts/PlayerMove.cs
-=======
    
         dir.y = yVelocity;
         cc.Move(dir * transform.lossyScale.x * Time.deltaTime * playerSpeed);
         Vector3 playerAngle = dir * 1 / Time.deltaTime;
         playerAngle.y = 0;
-            print(playerAngle);
-            if (jx != 0 || jy != 0)
-            {
-                transform.forward = playerAngle;
-            }
-    }
-        else
-        {
-            transform.position = Vector3.Lerp(transform.position, otherPosition, Time.deltaTime * 50);
-            transform.rotation = Quaternion.Lerp(transform.rotation, otherRotation, Time.deltaTime * 50);
-            anim.SetFloat("Horizontal", rex);
-            anim.SetFloat("Vertical", rey);
-        }
-    }
->>>>>>> Stashed changes:AR_Project_ParkBound_Rapa/Assets/01.HCH/00.MyAsset/01.Script/Player/PlayerMove.cs
-
-        if (yVelocity > maxJump)
-        {
-            yVelocity = maxJump;
-        }
-
-        dir.y = yVelocity;
-        cc.Move(dir);
+        transform.right = playerAngle;
     }
 }
 
